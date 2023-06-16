@@ -11,5 +11,5 @@ import com.dhiraj.Exception.StudentException;
 @Repository
 public interface StudentDao extends JpaRepository<Student, Integer>{
 
-	public Optional<Student> findByEmail(String email) throws StudentException;
+	public Optional<Student> findByEmail(String email);
 }

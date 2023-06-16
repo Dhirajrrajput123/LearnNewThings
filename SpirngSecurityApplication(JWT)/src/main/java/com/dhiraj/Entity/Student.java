@@ -1,13 +1,19 @@
 package com.dhiraj.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Student {
@@ -16,10 +22,17 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	
 	@Column(unique = true)
 	private String email;
+	
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
+	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer",fetch=FetchType.EAGER)
+	private List<Authority> authorities = new ArrayList<>();
+	
 	public Student(String name, String email, String password) {
 		super();
 		this.name = name;
@@ -28,6 +41,14 @@ public class Student {
 	}
 	public Student() {
 		super();
+	}
+	
+	
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
 	}
 	public int getId() {
 		return id;
