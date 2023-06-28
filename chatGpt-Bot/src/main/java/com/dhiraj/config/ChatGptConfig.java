@@ -10,12 +10,13 @@ public class ChatGptConfig {
 
 	@Value("${openai.api.key}")
 	private String openaiAPiKey;
+	
+	
 	@Bean
 	public RestTemplate template() {
 		RestTemplate temp=new RestTemplate();
-		
 		temp.getInterceptors().add((request,body,execution)->{
-			request.getHeaders().add("Authorization", "Bearer"+openaiAPiKey);
+			request.getHeaders().add("Authorization", "Bearer "+openaiAPiKey.trim());
 			return execution.execute(request, body);
 		});
 		return temp;
