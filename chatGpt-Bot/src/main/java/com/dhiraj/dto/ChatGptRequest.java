@@ -9,13 +9,13 @@ import lombok.Data;
 public class ChatGptRequest {
 
 	private String model;
-	private List<Message> message;
+	private List<Message> messages;
 	public ChatGptRequest(String model, String prompt) {
 		super();
 		this.model = model;
-		this.message = new ArrayList<>();
+		this.messages = new ArrayList<>();
 		
-		this.message.add(new Message("user", prompt));
+		this.messages.add(new Message("user", prompt));
 	}
 	
 	
